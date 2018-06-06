@@ -114,7 +114,7 @@ def get_message(inp):
                 a=bm+','+ "I win"
             break
         for y in info:
-            if imp.lower()==y:
+            if inp.lower()==y:
                 a="Chat Bot Test is an expertimental chat bot deployed on Facebook Messenger by Siddhant Saoji \nThis bot is currently in devlpoment phase"
                 break
                 
