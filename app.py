@@ -16,7 +16,7 @@ HAU=['how are you','how are you?']
 time=['time','what is the time','time?']
 date=['what is the date','date','date?','date ?']
 RPS=['rock','paper','scissor']
-
+info=['info','information','?']
 
 
 
@@ -115,7 +115,7 @@ def get_message(inp):
             break
         for y in info:
             if imp.lower()==y:
-                a="Chat Bot Test is an expertimental chat bot deployed on Facebook Messenger by Siddhant Saoji"
+                a="Chat Bot Test is an expertimental chat bot deployed on Facebook Messenger by Siddhant Saoji \nThis bot is currently in devlpoment phase"
                 break
                 
     if a=='':
