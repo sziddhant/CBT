@@ -63,7 +63,6 @@ def send_message(recipient_id, response):
 def get_message(inp):
 
     """
-
     print (message['nlp']['entities']['greetings'][0]['confidence'])
     x1,x2,x3='','',''
     if message['nlp']['entities']['greetings'][0]['confidence']> 0.98:
@@ -73,14 +72,10 @@ def get_message(inp):
         x2="Your Welcome"
     if message['nlp']['entities']['bye'][0]['confidence']> 0.98:
         x3="Bye"
-
-
         
     sample= ['1','2','3']
     ran=random.choice(sample)
-
     xn=x1+x2+x3
-
     """
 
     a,e='',''
@@ -118,7 +113,11 @@ def get_message(inp):
             else:
                 a=bm+','+ "I win"
             break
-
+        for y in info:
+            if imp.lower()==y:
+                a="Chat Bot Test is an expertimental chat bot deployed on Facebook Messenger by Siddhant Saoji"
+                break
+                
     if a=='':
         e="Sorry this is not supported yet"
     ans= a+e
@@ -127,11 +126,3 @@ def get_message(inp):
 
 if __name__ == '__main__':
     app.run()
-
-
-
-
-
-
-
-
