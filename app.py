@@ -82,7 +82,7 @@ def get_message(inp):
     a,e='',''
     for y1 in hello:
         if inp.lower()==y1:
-            a="Hello! :) \nTry Rock paper scisors \nAsk the date or time\nSay toss to do a toss"
+            a="Hello! :) \nTry Rock paper scisors \nAsk the date or time\nSay toss to flip a coin"
             break
     for y2 in bye:
         if inp.lower()==y2:
