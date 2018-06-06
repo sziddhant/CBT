@@ -1,5 +1,6 @@
 from flask import Flask, request
 import random
+import os
 from pymessenger.bot import Bot
 from datetime import date
 from datetime import time
@@ -20,8 +21,8 @@ RPS=['rock','paper','scissor']
 
 
 app = Flask(__name__)
-ACCESS_TOKEN = ''
-VERIFY_TOKEN = ''
+ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
+VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
 bot = Bot(ACCESS_TOKEN)
 
 @app.route('/', methods=['GET','POST'])
