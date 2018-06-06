@@ -18,7 +18,7 @@ date=['what is the date','date','date?','date ?']
 RPS=['rock','paper','scissor']
 info=['info','information','?']
 TOSS=['Heads','Tails']
-toss=['toss']
+toss=['toss','do a toss']
 
 
 app = Flask(__name__)
