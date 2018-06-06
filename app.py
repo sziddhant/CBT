@@ -17,7 +17,8 @@ time=['time','what is the time','time?']
 date=['what is the date','date','date?','date ?']
 RPS=['rock','paper','scissor']
 info=['info','information','?']
-
+TOSS=['Heads','Tails']
+toss=['toss']
 
 
 app = Flask(__name__)
@@ -112,6 +113,12 @@ def get_message(inp):
                 a=bm+','+"It's a tie!"
             else:
                 a=bm+','+ "I win"
+            break
+
+    for y6 in toss:
+        if inp.lower()==y6:
+            bm=random.choice(TOSS)
+            a=bm
             break
         for y in info:
             if inp.lower()==y:
