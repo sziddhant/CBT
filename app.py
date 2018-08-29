@@ -19,6 +19,13 @@ RPS=['rock','paper','scissor']
 info=['info','information','?']
 TOSS=['Heads','Tails']
 toss=['toss','do a toss']
+menu_m=['monday','monday menu']
+menu_t=['tuesday','tuesday menu']
+menu_w=['wednesday','wednesday menu']
+menu_th=['thursday','thursday menu']
+menu_f=['friday','friday menu']
+menu_s=['saturday','saturday menu']
+menu_sun=['sunday','sunday menu']
 
 
 app = Flask(__name__)
@@ -125,6 +132,36 @@ def get_message(inp):
                 a="Chat Bot Test is an expertimental chat bot deployed on Facebook Messenger by Siddhant Saoji \nThis bot is currently in devlpoment phase"
                 break
                 
+    for d in menu_m:
+        if inp.lower()==d:
+            a="(Breakfast)Poha Jalebi|| (Lunch)||Plain Rice, Arhar dal, Lauki Chana,Boondi Raita||(Dinner) Jeera Rice, Moong-Masoor Dal,Chhole Bhature"
+            break
+    for d in menu_t:
+        if inp.lower()==d:
+            a="(Breakfast)Uttpam, Sambhar, Coconut Chutney|| (Lunch)||Plain Rice, Dal Tadka, Aloo Matar,Seasonal Fruit Papaya||(Dinner) Fried Rice, Dal Tadka,Manchurian Gravy"
+            break
+    for d in menu_w:
+        if inp.lower()==d:
+            a="(Breakfast)Pyaaz and Azwain Paratha, Aloo Sabji|| (Lunch)||Plain Rice, Arhar dal, Lauki Chana,Boondi Raita,Chhachh||(Dinner) Plain Rice, Arhar Dal,Mix Veg"
+            break     
+    for d in menu_th:
+        if inp.lower()==d:
+            a="(Breakfast)Idli / Fried Idli, Sambhar, Coconut Chutney|| (Lunch)||Plain Rice, Yellow Arhar-Moong dal,Kadhi-Pakoda, Black Chana||(Dinner)Plain Rice, Arhar Dal, Red Pumpkin,Gulab Jamun/ Kala Jamun"
+            break
+    for d in menu_f:
+        if inp.lower()==d:
+            a="(Breakfast)Poori Sabji|| (Lunch)||Lemon Rice, Chana Dal, Bhindi Aloo,Banana,Gauva||(Dinner) Plain Rice, Dal Tadka,Paneer / Egg Curry, Ice Cream Cup#"
+            break
+    for d in menu_s:
+        if inp.lower()==d:
+            a="(Breakfast) Aloo Paratha, Dahi, Sauce, Pickle|| (Lunch) Fried Rice, Urad Dal,Veg Kolhapuri||(Dinner) Plain Rice, Dal Fry,Baingan Bharta, Boondi Laddu"
+            break  
+    for d in menu_sun:
+        if inp.lower()==d:
+            a="(Breakfast) Masala Dosa, Sambhar, Chutney|| (Lunch)Veg Biryani, Dal Fry, Paalak Aloo,||(Dinner) |Plain Rice, Dal Makhani,Cucumber Raita Paneer / Chicken, Rice Kheer"
+            break  
+ 
+            
     if a=='':
         e="Sorry this is not supported yet"
     ans= a+e
