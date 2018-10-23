@@ -7,7 +7,7 @@ from datetime import time
 from datetime import datetime
 from data import *
 
-from LUIS import *
+from luis import *
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
