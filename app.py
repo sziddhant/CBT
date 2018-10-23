@@ -5,16 +5,8 @@ from pymessenger.bot import Bot
 from datetime import date
 from datetime import time
 from datetime import datetime
+from data import *
 
-hello = ['hi', 'hello', 'hii', 'hiii', 'aloha', 'hola']
-bye = ['bye', 'byebye', 'bye bye', 'ciao']
-HAU = ['how are you', 'how are you?']
-time = ['time', 'what is the time', 'time?']
-date = ['what is the date', 'date', 'date?', 'date ?']
-RPS = ['rock', 'paper', 'scissor']
-info = ['info', 'information', '?']
-TOSS = ['Heads', 'Tails']
-toss = ['toss', 'do a toss']
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
