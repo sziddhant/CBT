@@ -1,3 +1,4 @@
+from data import *
 def get_message(inp):
     a, e = '', ''
     for y1 in hello:
