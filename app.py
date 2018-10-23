@@ -27,7 +27,7 @@ def recieve_message():
                     recipient_id = message['sender']['id']
                     if message['message'].get('text'):
                         print(message)
-                        response_sent_text = msg_luis(message['message']['text'])
+                        response_sent_text = get_message(message['message']['text'])
                         send_message(recipient_id, response_sent_text)
 
                     if message['message'].get('attachments'):
