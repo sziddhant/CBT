@@ -6,8 +6,8 @@ from datetime import date
 from datetime import time
 from datetime import datetime
 from data import *
-from old import *
 
+from LUIS import *
 
 app = Flask(__name__)
 ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
@@ -48,8 +48,6 @@ def verify_fb_token(token_sent):
 def send_message(recipient_id, response):
     bot.send_text_message(recipient_id, response)
     return "success"
-
-
 
 
 if __name__ == '__main__':
