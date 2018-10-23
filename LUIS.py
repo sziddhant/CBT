@@ -11,7 +11,7 @@ def msg_luis(inp):
     top_intent=(k['topScoringIntent']['intent'])
     return top_intent
 
-def get_message_old(inp):
+def get_message_old121(inp):
     msg = endpoint + imp
     ldata = requests.get(msg)
     k = ast.literal_eval(ldata.text)
