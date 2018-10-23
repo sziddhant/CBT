@@ -1,10 +1,8 @@
 from flask import Flask, request
-import random
+
 import os
 from pymessenger.bot import Bot
-from datetime import date
-from datetime import time
-from datetime import datetime
+
 from data import *
 
 from luis import *
