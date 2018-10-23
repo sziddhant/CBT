@@ -15,3 +15,4 @@ menu_th=['thursday','thursday menu']
 menu_f=['friday','friday menu']
 menu_s=['saturday','saturday menu']
 menu_sun=['sunday','sunday menu']
+
