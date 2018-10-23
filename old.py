@@ -1,4 +1,4 @@
-def get_message_old(inp):
+def get_message_old1(inp):
     a, e = '', ''
     for y1 in hello:
         if inp.lower() == y1:
