@@ -4,7 +4,7 @@ import ast
 
 
 def msg_luis(inp):
-    msg = endpoint + imp
+    msg = endpoint + inp
     ldata = requests.get(msg)
     k = ast.literal_eval(ldata.text)
     top_intent = (k['topScoringIntent']['intent'])
@@ -12,7 +12,7 @@ def msg_luis(inp):
 
 
 def get_message(inp):
-    msg = endpoint + imp
+    msg = endpoint + inp
     ldata = requests.get(msg)
     k = ast.literal_eval(ldata.text)
     top_intent = (k['topScoringIntent']['intent'])
