@@ -5,8 +5,7 @@ from pymessenger.bot import Bot
 from old import *
 
 app = Flask(__name__)
-ACCESS_TOKEN = os.environ['ACCESS_TOKEN']
-VERIFY_TOKEN = os.environ['VERIFY_TOKEN']
+
 bot = Bot(ACCESS_TOKEN)
 
 
