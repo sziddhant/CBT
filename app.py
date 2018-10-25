@@ -47,17 +47,15 @@ def db_update():
         # Drop previous table of same name if one exists
     cursor.execute("DROP TABLE IF EXISTS user;")
     print("Finished dropping table (if existed).")
-
+    print("About to create table")
     # Create table
     cursor.execute(
-        "CREATE TABLE inventory (id serial PRIMARY KEY, recipient_id VARCHAR(50),role VARCHAR(15),loc_lat VARCHAR(50),loc_long VARCHAR(50),requirements VARCHAR(200);")
+        "CREATE TABLE user (id serial PRIMARY KEY, recipient_id VARCHAR(50),role VARCHAR(15),loc_lat VARCHAR(50),loc_long VARCHAR(50),requirements VARCHAR(100));")
     print("Finished creating table.")
 
     # Insert some data into table
     for user in user_query.keys():
-        cursor.execute(
-            "INSERT INTO inventory (recipient_id, role,loc_lat,loc_long,requirements) VALUES (%s, %s, %s %s, %s);",
-            (user, user_role[user], users_location[user]["lat"], users_location[user]["long"], user_requirement))
+        cursor.execute("INSERT INTO inventory (recipient_id, role,loc_lat,loc_long,requirements) VALUES (%s, %s, %s %s, %s);",(user, user_role[user], users_location[user]["lat"], users_location[user]["long"], user_requirement))
         print("Inserted", cursor.rowcount, "row(s) of data.")
 
     # Cleanup
@@ -177,7 +175,7 @@ def recieve_message():
                         try:
                             db_update()
                         except:
-                            print("DB update failed")
+                            print("DB update fail")
                         print("\n")
                         print(message['message'])
                         print("\n")
