@@ -30,48 +30,30 @@ first_aid = "Call Alis"
 emergency_call_data = "Just Dial :- +918888888888"
 user_requirement = []
 
+try:
+    conn = mysql.connector.connect(**config)
+    print("Connection established")
+except mysql.connector.Error as err:
+    if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
+        print("Something is wrong with the user name or password")
+    elif err.errno == errorcode.ER_BAD_DB_ERROR:
+        print("Database does not exist")
+    else:
+        print(err)
+else:
+    cursor = conn.cursor()
+    # Drop previous table of same name if one exists
+    cursor.execute("DROP TABLE IF EXISTS user;")
+    print("Finished dropping table (if existed).")
+
+# Create table
+
+cursor.execute(
+    "CREATE TABLE user (id serial PRIMARY KEY, recipient_id VARCHAR(50),role VARCHAR(15),loc_lat VARCHAR(50),loc_long VARCHAR(50),requirements VARCHAR(100),Tname VARCHAR(100));")
+print("Finished creating table.")
+
 
 def db_update():
-    # Obtain connection string information from the portal
-    config = {
-        'host': 'bomysql.mysql.database.azure.com',
-        'user': 'user@bomysql',
-        'password': 'Password2',
-        'database': 'test'
-    }
-    users_location = {}
-    user_role = {}
-    user_query = {}
-    user_team = {}
-    user_requirements = {}
-    sit_up = "all good now"
-    resc_details = "The teams are on the way"
-    users = {}
-    first_aid = "Call Alis"
-    emergency_call_data = "Just Dial :- +918888888888"
-    user_requirement = []
-
-    try:
-        conn = mysql.connector.connect(**config)
-        print("Connection established")
-    except mysql.connector.Error as err:
-        if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
-            print("Something is wrong with the user name or password")
-        elif err.errno == errorcode.ER_BAD_DB_ERROR:
-            print("Database does not exist")
-        else:
-            print(err)
-    else:
-        cursor = conn.cursor()
-        # Drop previous table of same name if one exists
-        cursor.execute("DROP TABLE IF EXISTS user;")
-        print("Finished dropping table (if existed).")
-
-    # Create table
-
-    cursor.execute(
-        "CREATE TABLE user (id serial PRIMARY KEY, recipient_id VARCHAR(50),role VARCHAR(15),loc_lat VARCHAR(50),loc_long VARCHAR(50),requirements VARCHAR(100),Tname VARCHAR(100));")
-    print("Finished creating table.")
 
     # Insert some data into table
 
@@ -79,8 +61,8 @@ def db_update():
         print("1")
 
         cursor.execute(
-            "INSERT INTO user (recipient_id, role,loc_lat,loc_long,requirements,Tname) VALUES (%s, %s, %s, %s, %s);",
-            (user, user_role[user], users_location[user]["lat"], users_location[user]["long"]))
+            "INSERT INTO user (recipient_id, role,loc_lat,loc_long,requirements) VALUES (%s, %s, %s, %s, %s);",
+            (user, user_role[user], users_location[user]["lat"], users_location[user]["long"], str(user_requirement)))
         print("Inserted", cursor.rowcount, "row(s) of data.")
 
     # Cleanup
@@ -174,7 +156,7 @@ def recieve_message():
                         user_query[recipient_id] = ""
                         user_requirements[recipient_id] = ""
                         user_role[recipient_id] = ""
-                        users_location[recipient_id] = {'':'','':''}
+                        users_location[recipient_id] = {'lat':'','long':''}
 
                     if message['message'].get('text'):
                         print(message)
