@@ -32,6 +32,25 @@ user_requirement = []
 
 
 def db_update():
+    # Obtain connection string information from the portal
+    config = {
+        'host': 'bomysql.mysql.database.azure.com',
+        'user': 'user@bomysql',
+        'password': 'Password2',
+        'database': 'test'
+    }
+    users_location = {}
+    user_role = {}
+    user_query = {}
+    user_team = {}
+    user_requirements = {}
+    sit_up = "all good now"
+    resc_details = "The teams are on the way"
+    users = {}
+    first_aid = "Call Alis"
+    emergency_call_data = "Just Dial :- +918888888888"
+    user_requirement = []
+
     try:
         conn = mysql.connector.connect(**config)
         print("Connection established")
@@ -45,17 +64,23 @@ def db_update():
     else:
         cursor = conn.cursor()
         # Drop previous table of same name if one exists
-    cursor.execute("DROP TABLE IF EXISTS user;")
-    print("Finished dropping table (if existed).")
-    print("About to create table")
+        cursor.execute("DROP TABLE IF EXISTS user;")
+        print("Finished dropping table (if existed).")
+
     # Create table
+
     cursor.execute(
-        "CREATE TABLE user (id serial PRIMARY KEY, recipient_id VARCHAR(50),role VARCHAR(15),loc_lat VARCHAR(50),loc_long VARCHAR(50),requirements VARCHAR(100));")
+        "CREATE TABLE user (id serial PRIMARY KEY, recipient_id VARCHAR(50),role VARCHAR(15),loc_lat VARCHAR(50),loc_long VARCHAR(50),requirements VARCHAR(100),Tname VARCHAR(100));")
     print("Finished creating table.")
 
     # Insert some data into table
+
     for user in user_query.keys():
-        cursor.execute("INSERT INTO inventory (recipient_id, role,loc_lat,loc_long,requirements) VALUES (%s, %s, %s %s, %s);",(user, user_role[user], users_location[user]["lat"], users_location[user]["long"], user_requirement))
+        print("1")
+
+        cursor.execute(
+            "INSERT INTO user (recipient_id, role,loc_lat,loc_long,requirements,Tname) VALUES (%s, %s, %s, %s, %s);",
+            (user, user_role[user], users_location[user]["lat"], users_location[user]["long"]))
         print("Inserted", cursor.rowcount, "row(s) of data.")
 
     # Cleanup
@@ -63,9 +88,6 @@ def db_update():
     cursor.close()
     conn.close()
     print("Done.")
-
-
-
 
 
 def process(x, msgid):
@@ -79,7 +101,7 @@ def process(x, msgid):
             if x == "Hi":
 
                 print(user_role)
-                if msgid not in user_role.keys():
+                if user_role[msgid]=="":
                     z = "Hi!\nAre you a affected person or from a rescue team"
                     user_query[msgid] = "role"
 
@@ -87,7 +109,6 @@ def process(x, msgid):
                     z = "I can help you as follows\nEmergency\nSend requirements\nSituation Updates\nFirst-Aid Guidelines"
                     z = z + "\nMake Emergency Calls"
                     print("GG Pant")
-
 
             elif x == "situation":
                 z = sit_up
@@ -99,7 +120,7 @@ def process(x, msgid):
                     k = k + "\n" + key
                 send_message(msgid, k)
             elif x == "emergency_call":
-                z = emergency_call_data;
+                z = emergency_call_data
             elif x == "first-aid":
                 z = first_aid
         elif user_query[msgid] == "role":
@@ -153,7 +174,7 @@ def recieve_message():
                         user_query[recipient_id] = ""
                         user_requirements[recipient_id] = ""
                         user_role[recipient_id] = ""
-                        users_location[recipient_id] = ""
+                        users_location[recipient_id] = {'':'','':''}
 
                     if message['message'].get('text'):
                         print(message)
@@ -203,6 +224,3 @@ def send_message(recipient_id, response):
 if __name__ == '__main__':
     app.run()
 
-
-#################################
-##processing
