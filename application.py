@@ -1,6 +1,4 @@
 from flask import Flask, request
-from processing import *
-import os
 import mysql.connector
 from mysql.connector import errorcode
 
@@ -205,5 +203,5 @@ def send_message(recipient_id, response):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(port=80)
 
