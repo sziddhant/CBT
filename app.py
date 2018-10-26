@@ -1,5 +1,4 @@
 from flask import Flask, request
-from processing import *
 import os
 import mysql.connector
 from mysql.connector import errorcode
