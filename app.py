@@ -9,6 +9,7 @@ from old import *
 from data import *
 from luis import *
 
+
 config = {
     'host': 'bomysql.mysql.database.azure.com',
     'user': 'user@bomysql',
@@ -204,5 +205,5 @@ def send_message(recipient_id, response):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=80)
 
