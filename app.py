@@ -25,8 +25,25 @@ user_requirements = {}
 sit_up = "all good now"
 resc_details = "The teams are on the way"
 users = {}
-first_aid = "Call Alis"
-emergency_call_data = "Just Dial :- +918888888888"
+first_aid = ["https://www.cprcertified.com/blog/first-aid-and-health-safety-for-disasters"]
+emergency_call_data = [
+    ("All in One Emergency", 112),
+    ("Earth-quake Helpline service", 1092),
+    ("Natural disaster control room", 1096),
+    ("Police", 100),
+    ("Fire", 100),
+    ("Ambulance", 102),
+    ("Blood Requirement", 104),
+    ("Weather Enquiry", 1717),
+    ("Dial a doctor", 1911),
+    ("Air ambulance", 9540161344),
+    ("Disaster management", 108),
+    ("Emergency Relief Centre on National Highways", 1033),
+    ("Hospital On Wheels", 104),
+    ("Air Accident", 1071),
+    ("Train Accident", 1072),
+    ("Road Accident", 1073)
+]
 user_requirement = []
 
 try:
@@ -74,7 +91,7 @@ def db_update():
 def process(x, msgid):
     inp = x
     x = msg_luis(x)
-    z = 'idk'
+    z = 'I am unable to understand what you just said'
     if msgid not in user_query.keys():
         user_query[msgid] = ""
     else:
@@ -83,13 +100,11 @@ def process(x, msgid):
 
                 print(user_role)
                 if user_role[msgid]=="":
-                    z = "Hi!\nAre you a affected person or from a rescue team"
+                    z = "Hi!\nAre you? \n 1. Affected Person \n 2. From a Rescue Team"
                     user_query[msgid] = "role"
 
                 elif user_role[msgid] == "Affected":
-                    z = "I can help you as follows\nEmergency\nSend requirements\nSituation Updates\nFirst-Aid Guidelines"
-                    z = z + "\nMake Emergency Calls"
-                    print("GG Pant")
+                    z = "I can help you as follows:\n 1. Emergency\n 2. Send requirements\n 3. First-Aid Guidelines \n 4. Make Emergency Calls"
 
             elif x == "situation":
                 z = sit_up
@@ -101,7 +116,10 @@ def process(x, msgid):
                     k = k + "\n" + key
                 send_message(msgid, k)
             elif x == "emergency_call":
-                z = emergency_call_data
+                # z = emergency_call_data
+                for i in emergency_call_data:
+                    send_message(msgid, i[0] + " : " + i[1])
+                z = " "
             elif x == "first-aid":
                 z = first_aid
         elif user_query[msgid] == "role":
@@ -109,7 +127,6 @@ def process(x, msgid):
             print(inp)
             if inp.lower() == "team":
                 print(inp)
-                print("TEam if")
                 user_role[msgid] = "Team"
                 user_query[msgid] = "Tname"
                 z = "Enter Team name"
@@ -117,7 +134,7 @@ def process(x, msgid):
                 print(inp)
                 user_role[msgid] = "Affected"
                 user_query[msgid] = "requirements"
-                z = "Enter your Requirements\n type end to stop"
+                z = "Enter your Requirements\n Type end to stop"
 
         elif user_query[msgid] == "Tname":
             user_team[inp] = msgid
@@ -126,7 +143,7 @@ def process(x, msgid):
         elif user_query[msgid] == "requirements":
             if not inp.lower() == "end":
                 user_requirement.append(inp)
-            z = "ok, and?"
+            z = "anything more?"
             if inp == "end":
                 user_query[msgid] = ""
                 z = "Requirements are "
@@ -166,7 +183,6 @@ def recieve_message():
                     if message['message'].get('attachments'):
                         cordi = ""
                         try:
-
                             cordi = message['message']["attachments"][0]['payload']['coordinates']
 
                         except:
@@ -199,9 +215,9 @@ def verify_fb_token(token_sent):
 
 def send_message(recipient_id, response):
     bot.send_text_message(recipient_id, response)
-    return "success"
+    return "Success"
 
 
 if __name__ == '__main__':
-    app.run(port=80)
+    app.run(host='0.0.0.0')
 
