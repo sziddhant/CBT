@@ -203,5 +203,5 @@ def send_message(recipient_id, response):
 
 
 if __name__ == '__main__':
-    app.run(port=80)
+    app.run()
 
